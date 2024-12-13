@@ -1,0 +1,28 @@
+<nav>
+  <div class="logo">
+    <a routerLink="/">
+      <img src="assets/images/it.png" alt="Logo" />
+    </a>
+  </div>
+  <div class="burger-icon" (click)="toggleMobileMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div
+    class="tabs"
+    [ngClass]="{ 'show-links': isMobileMenuOpen }"
+    [@fadeInOut]="isMobileMenuOpen ? 'visible' : 'hidden'"
+  >
+   
+    <a
+      routerLink="/LoggedEntries"
+      [routerLinkActive]="['active']"
+      (click)="toggleMobileMenu()"
+      i18n
+      >{{ "LoggedEntries" | translate }}</a
+    >
+   
+    <app-language-switcher></app-language-switcher>
+  </div>
+</nav>

@@ -1,0 +1,104 @@
+<div class="filter-container">
+  <div>
+    <label for="service-filter">Service:</label>
+    <input
+      id="service-filter"
+      type="text"
+      placeholder="Filter by Service"
+      [(ngModel)]="filters.service"
+    />
+  </div>
+  <div>
+    <label for="level-filter">Level:</label>
+    <input
+      id="level-filter"
+      type="text"
+      placeholder="Filter by Level"
+      [(ngModel)]="filters.level"
+    />
+  </div>
+  <div>
+    <label for="from-date">From:</label>
+    <input
+      id="from-date"
+      type="date"
+      [(ngModel)]="filters.fromDate"
+    />
+  </div>
+  <div>
+    <label for="to-date">To:</label>
+    <input
+      id="to-date"
+      type="date"
+      [(ngModel)]="filters.toDate"
+    />
+  </div>
+  <br/>
+       <button
+      nz-button
+      nzType="primary"
+      (click)="applyFilters()"
+    >
+      Search
+    </button>
+ 
+</div>
+
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <h2 i18n>{{"Logged Entries List"}}</h2>
+  </div>
+  
+  <div>
+    <nz-table
+    [nzBordered]="true"
+    [nzData]="(logsList$ | async) ?? []"
+    [nzSize]="'middle'"
+    [nzPageSize]="pageSize"
+    [nzShowPagination]="false"
+    [nzTotal]="total"
+    [nzPageIndex]="pageIndex"
+    [nzLoading]="loading"
+    [nzScroll]="{ x: '1000px' }"
+    #LogsTable
+  >
+    <thead>
+      <tr>
+        <th i18n>{{ "Id" }}</th>
+        <th i18n>{{ "Service" }}</th>
+        <th i18n>{{ "Message" }}</th>
+        <th i18n>{{ "Level" }}</th>
+        <th i18n>{{ "Time Stamp" }}</th>
+        <th i18n>{{ "Actions" }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let log of (logsList$ | async) ?? []">
+        <td>{{ log.id }}</td>
+        <td>{{ log.service }}</td>
+        <td>{{ log.message }}</td>
+        <td>{{ log.level }}</td>
+        <td>{{ log.timeStamp }}</td>
+        <td style="display: flex; gap: 5px">
+          <!-- Edit Button -->
+          <button
+            nz-button
+            nzType="text"
+            (click)="handleEdit(log.id)"
+            nzSize="large"
+          >
+            <span nz-icon nzType="edit" nzTheme="outline"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <div class="pagination-buttons">
+    <button nz-button [disabled]="pageIndex === 1" (click)="onPreviousPage()">Previous</button>
+    <button nz-button [disabled]="pageIndex === total" (click)="onNextPage()">Next</button>
+  </div>
+  </div>
+</div>
+<app-log-dialog
+  [createEmployee]="createEmployee"
+></app-log-dialog>

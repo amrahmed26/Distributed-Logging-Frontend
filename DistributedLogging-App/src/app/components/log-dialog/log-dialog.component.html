@@ -1,0 +1,78 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="title"  
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleCancel()"
+>
+  <ng-container *nzModalContent>
+    <form
+      nz-form
+      [nzLayout]="'inline'"
+      [formGroup]="validateForm"
+      class="row"
+      style="row-gap: 10px"
+    >
+      <nz-form-item>
+        <nz-form-control
+          i18n-nzErrorTip
+        >
+          <nz-input-group nzPrefixIcon="user">
+            <input
+              formControlName="service"
+              nz-input
+              placeholder="service"
+              i18n-placeholder
+              readonly
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control
+          i18n-nzErrorTip
+        >
+          <nz-input-group nzPrefixIcon="number">
+            <input
+              formControlName="level"
+              nz-input
+              placeholder="Enter level"
+              i18n-placeholder
+              readonly
+
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control
+          i18n-nzErrorTip
+        >
+          <nz-input-group nzPrefixIcon="mobile">
+            <input
+              formControlName="message"
+              nz-input
+              placeholder="message"
+              i18n-placeholder
+              readonly
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+  
+      <nz-form-item>
+        <nz-form-control i18n-nzErrorTip>
+          <nz-date-picker
+            formControlName="timeStamp"
+            placeholder="Choose time Stamp"
+            i18n-placeholder
+            style="width: 100%"
+            readonly
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+ 
+    
+    </form>
+  </ng-container>
+</nz-modal>
